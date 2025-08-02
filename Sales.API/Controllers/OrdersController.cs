@@ -28,7 +28,7 @@ namespace Sales.API.Controllers
             return Ok(result);
         }
 
-        [HttpGet("/Customer/{customeId}")]
+        [HttpGet("CustomerId/{customeId}")]
         public async Task<ActionResult<IEnumerable<OrderResponseDto>>> GetByCustomerId(int customeId)
         {
             IEnumerable<Order> items = await orderService.GetAllbyCustomer(customeId);
@@ -42,7 +42,7 @@ namespace Sales.API.Controllers
             Order item = mapper.Map<Order>(dto);
             item.OrderDate = DateTime.UtcNow;
             OrderDetail itemDetail = mapper.Map<OrderDetail>(dto.OrderDetail);
-            
+
             await orderService.AddAsync(item);
 
             itemDetail.OrderId = item.OrderId;
