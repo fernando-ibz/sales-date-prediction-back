@@ -8,5 +8,11 @@ namespace Sales.Domain.Entities
         public int CategoryId { get; set; }
         public decimal UnitPrice { get; set; }
         public bool Discontinued { get; set; }
+
+        public Supplier Supplier { get; set; } = null!;
+
+        public Category Category { get; set; } = null!;
+
+        public ICollection<OrderDetail> OrderDetails { get; set; } = [];
     }
 }

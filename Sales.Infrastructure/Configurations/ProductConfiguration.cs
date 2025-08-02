@@ -10,6 +10,26 @@ namespace Sales.Infrastructure.Configurations
         {
             builder.ToTable("Products", "Production");
             builder.HasKey(p => p.ProductId);
+
+            builder.Property(p => p.ProductName)
+                   .IsRequired()
+                   .HasMaxLength(100);
+
+            builder.Property(p => p.UnitPrice)
+                   .HasColumnType("decimal(18,2)");
+
+            builder.Property(p => p.Discontinued)
+                   .IsRequired();
+
+            builder.HasOne(p => p.Supplier)
+                   .WithMany(s => s.Products)
+                   .HasForeignKey(p => p.SupplierId)
+                   .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(p => p.Category)
+                   .WithMany(c => c.Products)
+                   .HasForeignKey(p => p.CategoryId)
+                   .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

@@ -1,40 +1,48 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Sales.Application.DTOs;
+using Sales.Application.Services;
 using Sales.Domain.Entities;
-using Sales.Domain.Interfaces;
 
 namespace Sales.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class CustomerController(ICustomerService customerService) : ControllerBase
+    public class CustomerController(CustomerService customerService, IMapper mapper) : ControllerBase
     {
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Customer>>> GetAll()
+        public async Task<ActionResult<IEnumerable<CustomerResponseDto>>> GetAll()
         {
-            var customers = await customerService.GetAllAsync();
-            return Ok(customers);
+            IEnumerable<Customer> customers = await customerService.GetAllAsync();
+            IEnumerable<CustomerResponseDto> result = mapper.Map<IEnumerable<CustomerResponseDto>>(customers);
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Customer>> GetById(int id)
+        public async Task<ActionResult<CustomerResponseDto>> GetById(int id)
         {
-            var customer = await customerService.GetByIdAsync(id);
+            Customer? customer = await customerService.GetByIdAsync(id);
             if (customer == null) return NotFound();
-            return Ok(customer);
+
+            CustomerResponseDto result = mapper.Map<CustomerResponseDto>(customer);
+            return Ok(result);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Customer customer)
+        public async Task<IActionResult> Create(CustomerCreateDto dto)
         {
+            Customer customer = mapper.Map<Customer>(dto);
             await customerService.AddAsync(customer);
-            return CreatedAtAction(nameof(GetById), new { id = customer.CustId }, customer);
+            CustomerResponseDto result = mapper.Map<CustomerResponseDto>(customer);
+            return CreatedAtAction(nameof(GetById), new { id = result.CustId }, result);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, Customer customer)
+        public async Task<IActionResult> Update(int id, CustomerUpdateDto dto)
         {
-            if (id != customer.CustId) return BadRequest();
+            if (id != dto.CustId) return BadRequest();
 
+            Customer customer = mapper.Map<Customer>(dto);
             await customerService.UpdateAsync(customer);
             return NoContent();
         }
@@ -42,7 +50,7 @@ namespace Sales.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var customer = await customerService.GetByIdAsync(id);
+            Customer? customer = await customerService.GetByIdAsync(id);
             if (customer == null) return NotFound();
 
             await customerService.DeleteAsync(customer);
@@ -50,4 +58,3 @@ namespace Sales.API.Controllers
         }
     }
 }
-
