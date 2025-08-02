@@ -1,9 +1,10 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace Sales.Domain.DTOs
 {
     public class OrderDetailCreateDto
     {
-        // Todo OrderDetail
+        public required int ProductId { get; set; }
+        public required decimal UnitPrice { get; set; }
+        public required short Qty { get; set; }
+        public decimal Discount { get; set; } = 0;
     }
 }

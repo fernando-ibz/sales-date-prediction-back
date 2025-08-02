@@ -11,15 +11,15 @@ namespace Sales.Infrastructure.Configurations
             builder.ToTable("OrderDetails", "Sales");
             builder.HasKey(od => new { od.OrderId, od.ProductId });
 
-            builder.HasOne<Order>()
+            builder.HasOne(od => od.Order)
                    .WithMany()
                    .HasForeignKey(od => od.OrderId)
                    .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasOne<Product>()
-                   .WithMany()
-                   .HasForeignKey(od => od.ProductId)
-                   .OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(od => od.Product)
+                .WithMany(p => p.OrderDetails)
+                .HasForeignKey(od => od.ProductId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

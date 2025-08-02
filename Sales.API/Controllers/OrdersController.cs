@@ -8,7 +8,7 @@ namespace Sales.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class OrdersController(IOrderService orderService, IMapper mapper) : ControllerBase
+    public class OrdersController(IOrderService orderService, IOrderDetailService orderDetailService, IMapper mapper) : ControllerBase
     {
         [HttpGet]
         public async Task<ActionResult<IEnumerable<OrderResponseDto>>> GetAll()
@@ -40,7 +40,14 @@ namespace Sales.API.Controllers
         public async Task<IActionResult> Create(OrderCreateDto dto)
         {
             Order item = mapper.Map<Order>(dto);
+            item.OrderDate = DateTime.UtcNow;
+            OrderDetail itemDetail = mapper.Map<OrderDetail>(dto.OrderDetail);
+            
             await orderService.AddAsync(item);
+
+            itemDetail.OrderId = item.OrderId;
+            await orderDetailService.AddAsync(itemDetail);
+
             OrderResponseDto result = mapper.Map<OrderResponseDto>(item);
             return CreatedAtAction(nameof(GetById), new { id = item.OrderId }, result);
         }
