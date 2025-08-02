@@ -2,6 +2,10 @@ namespace Sales.Application.DTOs
 {
     public class OrderResponseDto
     {
-        // Propiedades para retornar Order
+        public int OrderId { get; set; }
+        public DateTime OrderDate { get; set; }
+        public int? EmployeeId { get; set; }
+        public int? ShipperId { get; set; }
+        public string? ShipAddress { get; set; }
     }
 }

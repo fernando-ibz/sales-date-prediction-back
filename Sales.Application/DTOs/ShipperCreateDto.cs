@@ -4,6 +4,9 @@ namespace Sales.Application.DTOs
 {
     public class ShipperCreateDto
     {
-        // Propiedades típicas para crear Shipper
+        [Required]
+        public string CompanyName { get; set; } = null!;
+
+        public string? Phone { get; set; }
     }
 }

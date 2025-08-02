@@ -11,6 +11,7 @@ namespace Sales.Application.Mappings
             CreateMap<Product, ProductResponseDto>();
             CreateMap<ProductCreateDto, Product>();
             CreateMap<ProductUpdateDto, Product>();
+            CreateMap<Product, ProductUpdateDto>();
         }
     }
 }

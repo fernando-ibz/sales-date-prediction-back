@@ -2,6 +2,8 @@ namespace Sales.Application.DTOs
 {
     public class ShipperResponseDto
     {
-        // Propiedades para retornar Shipper
+        public int ShipperId { get; set; }
+        public string CompanyName { get; set; } = null!;
+        public string? Phone { get; set; }
     }
 }

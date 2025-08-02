@@ -4,6 +4,11 @@ namespace Sales.Application.DTOs
 {
     public class EmployeeCreateDto
     {
-        // Propiedades típicas para crear Employee
+        [Required]
+        public string FirstName { get; set; } = null!;
+
+        public string? LastName { get; set; }
+
+        public string? Title { get; set; }
     }
 }

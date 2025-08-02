@@ -11,6 +11,7 @@ namespace Sales.Application.Mappings
             CreateMap<Shipper, ShipperResponseDto>();
             CreateMap<ShipperCreateDto, Shipper>();
             CreateMap<ShipperUpdateDto, Shipper>();
+            CreateMap<Shipper, ShipperUpdateDto>();
         }
     }
 }

@@ -11,6 +11,7 @@ namespace Sales.Application.Mappings
             CreateMap<Employee, EmployeeResponseDto>();
             CreateMap<EmployeeCreateDto, Employee>();
             CreateMap<EmployeeUpdateDto, Employee>();
+            CreateMap<Employee, EmployeeUpdateDto>();
         }
     }
 }

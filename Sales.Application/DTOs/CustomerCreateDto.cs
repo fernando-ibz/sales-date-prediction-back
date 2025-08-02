@@ -4,6 +4,6 @@ namespace Sales.Application.DTOs
 {
     public class CustomerCreateDto
     {
-        // Propiedades típicas para crear Customer
+        // Todo Customer
     }
 }

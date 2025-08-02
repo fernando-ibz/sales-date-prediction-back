@@ -2,6 +2,9 @@ namespace Sales.Application.DTOs
 {
     public class EmployeeResponseDto
     {
-        // Propiedades para retornar Employee
+        public int EmployeeId { get; set; }
+        public string FirstName { get; set; } = null!;
+        public string? LastName { get; set; }
+        public string? Title { get; set; }
     }
 }
