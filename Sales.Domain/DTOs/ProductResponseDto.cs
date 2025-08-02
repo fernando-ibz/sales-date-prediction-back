@@ -1,21 +1,12 @@
-using System.ComponentModel.DataAnnotations;
-
-namespace Sales.Application.DTOs
+namespace Sales.Domain.DTOs
 {
-    public class ProductUpdateDto
+    public class ProductResponseDto
     {
-        [Required]
         public int ProductId { get; set; }
-
-        [Required]
         public string ProductName { get; set; } = null!;
-
         public int SupplierId { get; set; }
-
         public int CategoryId { get; set; }
-
         public decimal? UnitPrice { get; set; }
-
         public bool Discontinued { get; set; }
     }
 }

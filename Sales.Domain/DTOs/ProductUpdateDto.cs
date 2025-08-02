@@ -1,9 +1,12 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Sales.Application.DTOs
+namespace Sales.Domain.DTOs
 {
-    public class ProductCreateDto
+    public class ProductUpdateDto
     {
+        [Required]
+        public int ProductId { get; set; }
+
         [Required]
         public string ProductName { get; set; } = null!;
 

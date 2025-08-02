@@ -1,5 +1,5 @@
 using AutoMapper;
-using Sales.Application.DTOs;
+using Sales.Domain.DTOs;
 using Sales.Domain.Entities;
 
 namespace Sales.Application.Mappings

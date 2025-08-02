@@ -1,9 +1,12 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Sales.Application.DTOs
+namespace Sales.Domain.DTOs
 {
-    public class EmployeeCreateDto
+    public class EmployeeUpdateDto
     {
+        [Required]
+        public int EmployeeId { get; set; }
+
         [Required]
         public string FirstName { get; set; } = null!;
 
@@ -12,3 +15,4 @@ namespace Sales.Application.DTOs
         public string? Title { get; set; }
     }
 }
+

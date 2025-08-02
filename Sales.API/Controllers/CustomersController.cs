@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Sales.Application.DTOs;
+using Sales.Domain.DTOs;
 using Sales.Domain.Entities;
 using Sales.Domain.Interfaces;
 
@@ -8,13 +8,26 @@ namespace Sales.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class CustomersController(ICustomerService customerService, IMapper mapper) : ControllerBase
+    public class CustomersController(ICustomerService customerService, IOrderService orderService, IMapper mapper) : ControllerBase
     {
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CustomerResponseDto>>> GetAll()
         {
             IEnumerable<Customer> customers = await customerService.GetAllAsync();
             IEnumerable<CustomerResponseDto> result = mapper.Map<IEnumerable<CustomerResponseDto>>(customers);
+            IEnumerable<OrderNextPredictedDto> orders = await orderService.GetAllOrderNextPredictedAsync();
+
+            foreach (CustomerResponseDto customer in result)
+            {
+                OrderNextPredictedDto? order = orders.FirstOrDefault(o => o.CustId == customer.CustId);
+
+                if (order == null) 
+                    continue;
+
+                customer.LastOrderDate = order.OrderDate;
+                customer.NextPredictedOrder = order.NextPredictedOrder;
+            }
+
             return Ok(result);
         }
 

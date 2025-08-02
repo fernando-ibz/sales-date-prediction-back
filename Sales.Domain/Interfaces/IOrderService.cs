@@ -1,4 +1,5 @@
-﻿using Sales.Domain.Entities;
+﻿using Sales.Domain.DTOs;
+using Sales.Domain.Entities;
 
 namespace Sales.Domain.Interfaces
 {
@@ -9,5 +10,6 @@ namespace Sales.Domain.Interfaces
         Task<IEnumerable<Order>> GetAllAsync();
         Task<Order?> GetByIdAsync(int id);
         Task UpdateAsync(Order entity);
+        Task<IEnumerable<OrderNextPredictedDto>> GetAllOrderNextPredictedAsync();
     }
 }

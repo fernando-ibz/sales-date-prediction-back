@@ -1,6 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Sales.Application.DTOs;
+using Sales.Domain.DTOs;
 using Sales.Domain.Entities;
 using Sales.Domain.Interfaces;
 

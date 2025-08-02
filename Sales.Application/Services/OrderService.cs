@@ -1,3 +1,4 @@
+using Sales.Domain.DTOs;
 using Sales.Domain.Entities;
 using Sales.Domain.Interfaces;
 
@@ -25,6 +26,11 @@ namespace Sales.Application.Services
         {
             repository.Remove(entity);
             await repository.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<OrderNextPredictedDto>> GetAllOrderNextPredictedAsync()
+        {
+            return [];
         }
     }
 }

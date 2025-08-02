@@ -1,16 +1,9 @@
-using System.ComponentModel.DataAnnotations;
-
-namespace Sales.Application.DTOs
+namespace Sales.Domain.DTOs
 {
-    public class ShipperUpdateDto
+    public class ShipperResponseDto
     {
-        [Required]
         public int ShipperId { get; set; }
-
-        [Required]
         public string CompanyName { get; set; } = null!;
-
         public string? Phone { get; set; }
     }
 }
-
