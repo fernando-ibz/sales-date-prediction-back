@@ -28,7 +28,10 @@ namespace Sales.Application.Services
             await repository.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<OrderNextPredictedDto>> GetAllOrderNextPredictedAsync() 
+        public async Task<IEnumerable<OrderNextPredictedDto>> GetAllOrderNextPredictedAsync()
             => await repository.ExecuteStoredProcedureAsync<OrderNextPredictedDto>("EXEC Sales.usp_GetNextOrderPrediction");
+
+        public async Task<IEnumerable<Order>> GetAllbyCustomer(int customerId)
+            => await repository.FindAsync(o => o.CustId == customerId);
     }
 }

@@ -28,6 +28,14 @@ namespace Sales.API.Controllers
             return Ok(result);
         }
 
+        [HttpGet("/Customer/{customeId}")]
+        public async Task<ActionResult<IEnumerable<OrderResponseDto>>> GetByCustomerId(int customeId)
+        {
+            IEnumerable<Order> items = await orderService.GetAllbyCustomer(customeId);
+            IEnumerable<OrderResponseDto> result = mapper.Map<IEnumerable<OrderResponseDto>>(items);
+            return Ok(result);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create(OrderCreateDto dto)
         {

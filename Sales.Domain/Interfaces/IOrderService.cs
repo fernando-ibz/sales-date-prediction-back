@@ -11,5 +11,6 @@ namespace Sales.Domain.Interfaces
         Task<Order?> GetByIdAsync(int id);
         Task UpdateAsync(Order entity);
         Task<IEnumerable<OrderNextPredictedDto>> GetAllOrderNextPredictedAsync();
+        Task<IEnumerable<Order>> GetAllbyCustomer(int customerId);
     }
 }
