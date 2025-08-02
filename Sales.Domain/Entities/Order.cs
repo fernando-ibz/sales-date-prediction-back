@@ -16,5 +16,8 @@ namespace Sales.Domain.Entities
         public string? ShipRegion { get; set; }
         public string? ShipPostalCode { get; set; }
         public string ShipCountry { get; set; }
+
+        public Employee? Employee { get; set; }
+        public Shipper? Shipper { get; set; }
     }
 }

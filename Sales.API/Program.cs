@@ -13,6 +13,56 @@ ILoggerFactory loggerFactory = LoggerFactory.Create(logging => logging.AddConsol
 builder.Services.AddDbContext<StoreDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("StoreDBConnection")));
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CORSProdPolicy", policy =>
+    {
+        policy
+        .SetIsOriginAllowed(origin =>
+        {
+            if (string.IsNullOrWhiteSpace(origin))
+            {
+                Console.WriteLine($"CORS Production Policy. Origin is empty.");
+                return false;
+            }
+
+            string host = new Uri(origin).Host.ToLowerInvariant();
+            bool isProduction = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production";
+
+            if (host.EndsWith(builder.Configuration.GetValue<string>("ProdAllowedHost")!, StringComparison.OrdinalIgnoreCase))
+                return true;
+
+            Console.WriteLine($"CORS ProductionPolicy. Origin: {origin} is not allowed.");
+            return false;
+        })
+        .AllowAnyMethod()
+        .AllowCredentials()
+        .AllowAnyHeader();
+    });
+
+    options.AddPolicy("CORSDevPolicy", policy =>
+    {
+        policy
+        .SetIsOriginAllowed(origin =>
+        {
+            if (string.IsNullOrWhiteSpace(origin)) return false;
+
+            string host = new Uri(origin).Host.ToLowerInvariant();
+
+            if (new Uri(origin).Host != "localhost")
+            {
+                Console.WriteLine($"CORS Developer Policy. Origin: {origin} is not allowed.");
+                return false;
+            }
+
+            return true;
+        })
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowCredentials();
+    });
+});
+
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
@@ -43,7 +93,7 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
     {
-        Title = "Sales API",
+        Title = "Sales Date Prediction API",
         Version = "v1"
     });
 });
@@ -55,7 +105,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sales API v1");
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sales Date Prediction v1");
     });
 }
 

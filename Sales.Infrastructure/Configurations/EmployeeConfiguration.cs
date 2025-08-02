@@ -10,6 +10,16 @@ namespace Sales.Infrastructure.Configurations
         {
             builder.ToTable("Employees", "HR");
             builder.HasKey(e => e.EmpId);
+            
+            builder.Property(e => e.FirstName)
+                .IsRequired()
+                .HasMaxLength(100);
+
+            builder.Property(e => e.LastName)
+                   .HasMaxLength(100);
+
+            builder.Property(e => e.Title)
+                   .HasMaxLength(100);
         }
     }
 }

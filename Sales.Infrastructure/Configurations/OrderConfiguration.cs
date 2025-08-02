@@ -11,20 +11,21 @@ namespace Sales.Infrastructure.Configurations
             builder.ToTable("Orders", "Sales");
             builder.HasKey(o => o.OrderId);
 
-            builder.HasOne<Customer>()
-                   .WithMany()
-                   .HasForeignKey(o => o.CustId)
-                   .OnDelete(DeleteBehavior.Restrict);
+            builder.Property(o => o.OrderDate)
+                   .IsRequired();
 
-            builder.HasOne<Employee>()
-                   .WithMany()
+            builder.Property(o => o.ShipAddress)
+                   .HasMaxLength(200);
+
+            builder.HasOne(o => o.Employee)
+                   .WithMany(e => e.Orders)
                    .HasForeignKey(o => o.EmpId)
-                   .OnDelete(DeleteBehavior.Restrict);
+                   .OnDelete(DeleteBehavior.SetNull);
 
-            builder.HasOne<Shipper>()
-                   .WithMany()
+            builder.HasOne(o => o.Shipper)
+                   .WithMany(s => s.Orders)
                    .HasForeignKey(o => o.ShipperId)
-                   .OnDelete(DeleteBehavior.Restrict);
+                   .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }

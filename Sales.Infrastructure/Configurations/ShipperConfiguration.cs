@@ -10,6 +10,13 @@ namespace Sales.Infrastructure.Configurations
         {
             builder.ToTable("Shippers", "Sales");
             builder.HasKey(s => s.ShipperId);
+
+            builder.Property(s => s.CompanyName)
+                .IsRequired()
+                .HasMaxLength(150);
+
+            builder.Property(s => s.Phone)
+                   .HasMaxLength(50);
         }
     }
 }
