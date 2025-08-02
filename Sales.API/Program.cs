@@ -111,8 +111,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors(app.Environment.IsDevelopment()
-    ? "DevelopmentPolicy"
-    : "ProductionPolicy");
+    ? "CORSDevPolicy"
+    : "CORSProdPolicy");
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
