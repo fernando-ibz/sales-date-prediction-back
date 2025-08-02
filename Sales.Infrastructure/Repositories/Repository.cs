@@ -29,6 +29,13 @@ namespace Sales.Infrastructure.Repositories
         public void Remove(T entity) => _dbSet.Remove(entity);
 
         public async Task SaveChangesAsync() => await _context.SaveChangesAsync();
+
+        public async Task<IEnumerable<TResult>> ExecuteStoredProcedureAsync<TResult>(string sql, params object[] parameters) where TResult : class
+        {
+            return await _context.Set<TResult>()
+                .FromSqlRaw(sql, parameters)
+                .ToArrayAsync();
+        }
     }
 }
 

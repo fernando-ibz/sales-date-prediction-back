@@ -13,7 +13,7 @@ namespace Sales.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CustomerResponseDto>>> GetAll()
         {
-            IEnumerable<Customer> customers = await customerService.GetAllAsync();
+            IEnumerable<Customer> customers = (await customerService.GetAllAsync()).OrderBy(c => c.CompanyName);
             IEnumerable<CustomerResponseDto> result = mapper.Map<IEnumerable<CustomerResponseDto>>(customers);
             IEnumerable<OrderNextPredictedDto> orders = await orderService.GetAllOrderNextPredictedAsync();
 
@@ -24,7 +24,7 @@ namespace Sales.API.Controllers
                 if (order == null) 
                     continue;
 
-                customer.LastOrderDate = order.OrderDate;
+                customer.LastOrderDate = order.LastOrderDate;
                 customer.NextPredictedOrder = order.NextPredictedOrder;
             }
 

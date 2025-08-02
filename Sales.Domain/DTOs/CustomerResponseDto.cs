@@ -13,8 +13,8 @@ namespace Sales.Domain.DTOs
         public string? Country { get; set; }
         public string? Phone { get; set; }
         public string? Fax { get; set; }
-        //Todo: fix
-        public DateTime? NextPredictedOrder { get; set; } = DateTime.Now;
-        public DateTime? LastOrderDate { get; set; } = DateTime.Now;
+        
+        public DateTime? NextPredictedOrder { get; set; }
+        public DateTime? LastOrderDate { get; set; }
     }
 }

@@ -11,5 +11,6 @@ namespace Sales.Domain.Interfaces
         void Update(T entity);
         void Remove(T entity);
         Task SaveChangesAsync();
+        Task<IEnumerable<TResult>> ExecuteStoredProcedureAsync<TResult>(string sql, params object[] parameters) where TResult : class;
     }
 }
