@@ -8,7 +8,7 @@ namespace Sales.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class CustomerController(ICustomerService customerService, IMapper mapper) : ControllerBase
+    public class CustomersController(ICustomerService customerService, IMapper mapper) : ControllerBase
     {
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CustomerResponseDto>>> GetAll()

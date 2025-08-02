@@ -6,7 +6,6 @@ using Sales.Application.Services;
 using Sales.Domain.Interfaces;
 using Sales.Infrastructure.Data;
 using Sales.Infrastructure.Repositories;
-using System.Diagnostics;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 ILoggerFactory loggerFactory = LoggerFactory.Create(logging => logging.AddConsole());
