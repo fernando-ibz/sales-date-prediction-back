@@ -8,7 +8,7 @@ namespace Sales.Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<Customer> builder)
         {
-            builder.ToTable("Customers");
+            builder.ToTable("Customers", "Sales");
             builder.HasKey(c => c.CustId);
             builder.Property(c => c.CompanyName).IsRequired().HasMaxLength(100);
         }

@@ -8,7 +8,7 @@ namespace Sales.Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<Shipper> builder)
         {
-            builder.ToTable("Shippers");
+            builder.ToTable("Shippers", "Sales");
             builder.HasKey(s => s.ShipperId);
         }
     }

@@ -8,7 +8,7 @@ namespace Sales.Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<OrderDetail> builder)
         {
-            builder.ToTable("OrderDetails");
+            builder.ToTable("OrderDetails", "Sales");
             builder.HasKey(od => new { od.OrderId, od.ProductId });
 
             builder.HasOne<Order>()

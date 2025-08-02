@@ -8,7 +8,7 @@ namespace Sales.Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<Employee> builder)
         {
-            builder.ToTable("Employees");
+            builder.ToTable("Employees", "HR");
             builder.HasKey(e => e.EmpId);
         }
     }
