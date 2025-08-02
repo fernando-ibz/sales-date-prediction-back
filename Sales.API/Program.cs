@@ -1,11 +1,12 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using Sales.Application.Mappings;
 using Sales.Application.Services;
 using Sales.Domain.Interfaces;
 using Sales.Infrastructure.Data;
 using Sales.Infrastructure.Repositories;
-using Microsoft.OpenApi.Models;
+using System.Diagnostics;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 ILoggerFactory loggerFactory = LoggerFactory.Create(logging => logging.AddConsole());
@@ -108,6 +109,10 @@ if (app.Environment.IsDevelopment())
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sales Date Prediction v1");
     });
 }
+
+app.UseCors(app.Environment.IsDevelopment()
+    ? "DevelopmentPolicy"
+    : "ProductionPolicy");
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
