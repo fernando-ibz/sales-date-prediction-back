@@ -5,6 +5,7 @@ using Sales.Application.Services;
 using Sales.Domain.Interfaces;
 using Sales.Infrastructure.Data;
 using Sales.Infrastructure.Repositories;
+using Microsoft.OpenApi.Models;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 ILoggerFactory loggerFactory = LoggerFactory.Create(logging => logging.AddConsole());
@@ -38,14 +39,24 @@ IMapper mapper = new Mapper(mapperConfig);
 builder.Services.AddSingleton(mapper);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Sales API",
+        Version = "v1"
+    });
+});
 
 WebApplication app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sales API v1");
+    });
 }
 
 app.UseHttpsRedirection();

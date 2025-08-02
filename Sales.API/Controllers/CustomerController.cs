@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Sales.Application.DTOs;
-using Sales.Application.Services;
 using Sales.Domain.Entities;
+using Sales.Domain.Interfaces;
 
 namespace Sales.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class CustomerController(CustomerService customerService, IMapper mapper) : ControllerBase
+    public class CustomerController(ICustomerService customerService, IMapper mapper) : ControllerBase
     {
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CustomerResponseDto>>> GetAll()
