@@ -32,7 +32,7 @@ dotnet restore
 
 ### 3. Configurar la base de datos
 - Ejecutar el script `DBSetup.sql` en su instancia de SQL Server
-  Disponible en le ruta del repositorio `\Sales.Infrastructure\Scripts\usp_GetNextOrderPrediction.sql`
+  Disponible en le ruta del repositorio [\Sales.Infrastructure\Scripts\DBSetup.sql](https://github.com/fernando-ibz/sales-date-prediction-back/blob/3d0f19141900a85193827af1354885e8c02ad620/Sales.Infrastructure/Scripts/DBSetup.sql)
 
 - Actualiza la cadena de conexión en `appsettings.json`:
   ```json
@@ -43,7 +43,7 @@ dotnet restore
   }
   ```
 - Ejecutar el script "usp_GetNextOrderPrediction.sql"
-  Disponible en le ruta del repositorio `\Sales.Infrastructure\Scripts\usp_GetNextOrderPrediction.sql`
+  Disponible en le ruta del repositorio [\Sales.Infrastructure\Scripts\usp_GetNextOrderPrediction.sql](https://github.com/fernando-ibz/sales-date-prediction-back/blob/3d0f19141900a85193827af1354885e8c02ad620/Sales.Infrastructure/Scripts/usp_GetNextOrderPrediction.sql)
 
 ### 4. Ejecutar la aplicación
 ```bash
