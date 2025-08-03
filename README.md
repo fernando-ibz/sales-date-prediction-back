@@ -55,20 +55,21 @@ La API estará disponible en `https://localhost:7017` y `http://localhost:5099`.
 
 El proyecto sigue los principios de Clean Architecture:
 ```
-├──Sales.API                  # Capa de presentación
-│  ├── Controllers
-│  └── Program.cs
-├──Sales.Application          # Capa de aplicación
-│  ├── Services
-├──Sales.Domain               # Capa de dominio
-│  ├── DTOs
-│  ├── Entities
-│  ├── Interfaces
-├──Sales.Infrastructure       # Capa de infraestructura
-│  ├── Configurations
-│  ├── Data
-│  ├── Repositories
-├──Sales.Tests                # Capa de Pruebas Unitarias
+SalesDatePrediction
+├──Sales.API                  # Capa de Presentación - Controladores REST y configuración HTTP
+│  ├── Controllers            # Controladores que exponen endpoints de la API
+│  └── Program.cs             # Punto de entrada y configuración de la aplicación
+├──Sales.Application          # Capa de Aplicación - Lógica de negocio y casos de uso
+│  ├── Services               # Servicios que orquestan operaciones de dominio
+├──Sales.Domain               # Capa de Dominio - Entidades de negocio y contratos
+│  ├── DTOs                   # Data Transfer Objects para comunicación entre capas
+│  ├── Entities               # Entidades del dominio que representan conceptos de negocio
+│  ├── Interfaces             # Contratos e interfaces del dominio
+├──Sales.Infrastructure       # Capa de Infraestructura - Acceso a datos y servicios externos
+│  ├── Configurations         # Configuraciones de Entity Framework y mapeos Fluen API
+│  ├── Data                   # Contexto de base de datos
+│  ├── Repositories           # Implementaciones concretas de repositorios
+├──Sales.Tests                # Capa de Pruebas - Testing automatizado
 ```
 
 ### Patrones Implementados
