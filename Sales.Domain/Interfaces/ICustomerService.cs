@@ -1,4 +1,5 @@
-﻿using Sales.Domain.Entities;
+﻿using Sales.Domain.DTOs;
+using Sales.Domain.Entities;
 
 namespace Sales.Domain.Interfaces
 {
@@ -6,7 +7,8 @@ namespace Sales.Domain.Interfaces
     {
         Task AddAsync(Customer entity);
         Task DeleteAsync(Customer entity);
-        Task<IEnumerable<Customer>> GetAllAsync();
+        Task<IEnumerable<CustomerResponseDto>> GetAllAsync();
+        Task<IEnumerable<CustomerResponseDto>> GetAllByCustomerName(string customerName);
         Task<Customer?> GetByIdAsync(int id);
         Task UpdateAsync(Customer entity);
     }

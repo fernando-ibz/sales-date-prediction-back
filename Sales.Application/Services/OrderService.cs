@@ -1,6 +1,8 @@
+using Microsoft.Data.SqlClient;
 using Sales.Domain.DTOs;
 using Sales.Domain.Entities;
 using Sales.Domain.Interfaces;
+using System.Data;
 
 namespace Sales.Application.Services
 {
@@ -28,8 +30,20 @@ namespace Sales.Application.Services
             await repository.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<OrderNextPredictedDto>> GetAllOrderNextPredictedAsync()
-            => await repository.ExecuteStoredProcedureAsync<OrderNextPredictedDto>("EXEC Sales.usp_GetNextOrderPrediction");
+        public async Task<IEnumerable<OrderNextPredictedDto>> GetAllOrderNextPredictedAsync(string? customerIds = null)
+        {
+            List<SqlParameter> parameters = [
+                new SqlParameter
+                {
+                    ParameterName = "@custids",
+                    SqlDbType = SqlDbType.NVarChar, 
+                    Value = string.IsNullOrEmpty(customerIds) ? DBNull.Value : customerIds, 
+                    Size = -1 
+                }
+                ];
+
+            return await repository.ExecuteStoredProcedureAsync<OrderNextPredictedDto>("EXEC Sales.usp_GetNextOrderPrediction @custids", [.. parameters]);
+        }
 
         public async Task<IEnumerable<Order>> GetAllbyCustomer(int customerId)
             => await repository.FindAsync(o => o.CustId == customerId);

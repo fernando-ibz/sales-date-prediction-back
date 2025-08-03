@@ -8,26 +8,12 @@ namespace Sales.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class CustomersController(ICustomerService customerService, IOrderService orderService, IMapper mapper) : ControllerBase
+    public class CustomersController(ICustomerService customerService, IMapper mapper) : ControllerBase
     {
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CustomerResponseDto>>> GetAll()
         {
-            IEnumerable<Customer> customers = (await customerService.GetAllAsync()).OrderBy(c => c.CompanyName);
-            IEnumerable<CustomerResponseDto> result = mapper.Map<IEnumerable<CustomerResponseDto>>(customers);
-            IEnumerable<OrderNextPredictedDto> orders = await orderService.GetAllOrderNextPredictedAsync();
-
-            foreach (CustomerResponseDto customer in result)
-            {
-                OrderNextPredictedDto? order = orders.FirstOrDefault(o => o.CustId == customer.CustId);
-
-                if (order == null) 
-                    continue;
-
-                customer.LastOrderDate = order.LastOrderDate;
-                customer.NextPredictedOrder = order.NextPredictedOrder;
-            }
-
+            IEnumerable<CustomerResponseDto> result = await customerService.GetAllAsync();
             return Ok(result);
         }
 
@@ -68,6 +54,13 @@ namespace Sales.API.Controllers
 
             await customerService.DeleteAsync(customer);
             return NoContent();
+        }
+
+        [HttpGet("CustomerName")]
+        public async Task<ActionResult<IEnumerable<CustomerResponseDto>>> GetAllByCustomerName([FromQuery] string customerName)
+        {
+            IEnumerable<CustomerResponseDto> result = await customerService.GetAllByCustomerName(customerName);
+            return Ok(result);
         }
     }
 }
