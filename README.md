@@ -76,7 +76,7 @@ El proyecto sigue los principios de Clean Architecture:
 - **Repository Pattern**: Abstracción del acceso a datos con un repositorio generico con uso de tipos ligado a entidades
 - **Fluent API**: Legibilidad y fácil depuración de modelos de datos
 - **CQRS**: Separación de comandos y consultas con restricción de dóminio
-- **Dependency Injection**: Inversión de control
+- **Dependency Injection**: Uso de interfaces para registrar y resolver las dependencias.
 - **Data Transfer Object (DTO)**: Transporte de datos y baja exposición de las entidades de negocio
 
 ## 📊 Modelo de Datos
