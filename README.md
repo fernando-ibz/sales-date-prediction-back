@@ -80,6 +80,7 @@ El proyecto sigue los principios de Clean Architecture:
 - **Data Transfer Object (DTO)**: Transporte de datos y baja exposición de las entidades de negocio
 
 ## 📊 Modelo de Datos
+<img width="1072" height="748" alt="image" src="https://github.com/user-attachments/assets/58558d49-09bf-49c7-b625-9be44fca8e18" />
 
 ### Diagrama
 
