@@ -40,7 +40,6 @@ namespace Sales.API.Controllers
         public async Task<IActionResult> Create(OrderCreateDto dto)
         {
             Order item = mapper.Map<Order>(dto);
-            item.OrderDate = DateTime.UtcNow;
             OrderDetail itemDetail = mapper.Map<OrderDetail>(dto.OrderDetail);
 
             await orderService.AddAsync(item);
